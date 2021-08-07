@@ -6,8 +6,8 @@
 #include <QMessageBox>
 #include "ui_mainwindow.h"
 #include <string>
-#include "alphabet.h"
 #include "passwordgenerator.h"
+#include "settingswindow.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE
@@ -23,7 +23,6 @@ public:
     ~MainWindow();
 
 private:
-    PasswordGenerator* passwordGenerator;
     Ui::MainWindow *ui;
     QTableWidgetItem* TableItem(string name);
     void setAdditionsTableItemValue(int row, int column, int value);
@@ -36,5 +35,8 @@ private:
     void placeTableBackgroundColor(PasswordStrengthValues strengthValues);
     void setPasswordStrengthDisplay(int score);
     void setRowBackgrounColor(QTableWidget* table,int row, QColor color);
+
+    void OpenSettingsWindow();
+    void OpenAboutWindow();
 };
 #endif // MAINWINDOW_H

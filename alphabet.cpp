@@ -42,3 +42,19 @@ string Alphabet::getNumbers(){
 string Alphabet::getSymbols(){
     return this->Symbols;
 }
+
+int Alphabet::getUpperCaseLetterCount(){
+    return this->UpperCaseLetters.length();
+}
+
+int Alphabet::getLowerCaseLetterCount(){
+    return this->LowerCaseLetters.length();
+}
+
+int Alphabet::getNumbersCount(){
+    return this->Numbers.length();
+}
+
+int Alphabet::getSymbolsCount(){
+    return this->Symbols.length();
+}

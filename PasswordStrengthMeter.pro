@@ -12,15 +12,18 @@ SOURCES += \
     alphabet.cpp \
     main.cpp \
     mainwindow.cpp \
-    passwordgenerator.cpp
+    passwordgenerator.cpp \
+    settingswindow.cpp
 
 HEADERS += \
     alphabet.h \
     mainwindow.h \
-    passwordgenerator.h
+    passwordgenerator.h \
+    settingswindow.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    settingswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,13 +1,29 @@
 #include "passwordgenerator.h"
 
-PasswordGenerator::PasswordGenerator(Alphabet* alphabet)
+PasswordGenerator* PasswordGenerator::instance = nullptr;
+
+PasswordGenerator *PasswordGenerator::GetInstance(Alphabet* alphabet)
 {
+    if(instance == nullptr){
+        instance = new PasswordGenerator(alphabet);
+    }
+    return instance;
+}
+
+PasswordGenerator::PasswordGenerator(Alphabet* alphabet): alphabet(alphabet){
+
+}
+
+PasswordGenerator::~PasswordGenerator(){
+    delete this->alphabet;
+}
+
+void PasswordGenerator::setAlphabet(Alphabet* alphabet){
     this->alphabet = alphabet;
 }
 
-
-PasswordGenerator::~PasswordGenerator(){
-    delete alphabet;
+Alphabet* PasswordGenerator::getAlphabet(){
+    return this->alphabet;
 }
 
 bool PasswordGenerator::isLetter(char character){
@@ -109,6 +125,7 @@ string PasswordGenerator::GenerateRandomPassword(int numberOfLetters){
         }
         numberOfLetters--;
     }
+    result.erase(std::find(result.begin(), result.end(), '\0'), result.end());
     return result;
 };
 

@@ -7,17 +7,17 @@ QColor yellowColor = QColor::fromRgbF(255, 255, 0, 0.5);
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
-    passwordGenerator = new PasswordGenerator(new Alphabet(AlphabetName::Latin));
+    this->setWindowTitle("Password Strength Meter");
     connect(ui->randomPasswordButton, &QPushButton::clicked, this, &MainWindow::RandomPasswordButtonClicked);
     connect(ui->passwordInput, &QLineEdit::textChanged, this, &MainWindow::PasswordInputTextChanged);
     connect(ui->passwordLengthSlider, &QSlider::valueChanged, this, &MainWindow::RandomPasswordLengthChanged);
+    connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::OpenSettingsWindow);
     ui->passwordLengthText->setText(QString::fromStdString(to_string(ui->passwordLengthSlider->value())));
     DrawTable();
 }
 
 MainWindow::~MainWindow()
 {
-    delete passwordGenerator;
     delete ui;
 }
 
@@ -153,14 +153,14 @@ void MainWindow::DrawTable(){
 void MainWindow::RandomPasswordButtonClicked(){
     QLineEdit* passwordInput = ui->passwordInput;
     int passwordLength = ui->passwordLengthSlider->value();
-    string RandomPassword = passwordGenerator->GenerateRandomPassword(passwordLength);
+    string RandomPassword = PasswordGenerator::GetInstance()->GenerateRandomPassword(passwordLength);
     passwordInput->setText(QString::fromStdString(RandomPassword));
 }
 
 void MainWindow::PasswordInputTextChanged(const QString& changedValue){
-    PasswordStrengthValues strengthValues = passwordGenerator->calculatePasswordStrength(changedValue.toStdString());
+    PasswordStrengthValues strengthValues = PasswordGenerator::GetInstance()->calculatePasswordStrength(changedValue.toStdString());
     placeStrengthValuesToTables(strengthValues);
-    int passwordTotalScore = passwordGenerator->getPasswordScore(strengthValues);
+    int passwordTotalScore = PasswordGenerator::GetInstance()->getPasswordScore(strengthValues);
     setPasswordStrengthDisplay(passwordTotalScore);
 }
 
@@ -378,4 +378,10 @@ void MainWindow::setRowBackgrounColor(QTableWidget* table, int row, QColor color
     for (int i = 0; i < table->columnCount(); i++) {
         table->item(row, i)->setBackground(color);
     }
+}
+
+void MainWindow::OpenSettingsWindow(){
+    SettingsWindow* settingsWindow = new SettingsWindow(this);
+    settingsWindow->setWindowModality(Qt::ApplicationModal);
+    settingsWindow->show();
 }
