@@ -2,7 +2,7 @@
 
 A simple application which calculate password strength.
 
-##Rules of Calculating Password Strength
+## Rules of Calculating Password Strength
 - **Additions**
     - Number of characters
     - Uppercase letters
@@ -22,7 +22,7 @@ A simple application which calculate password strength.
     - Sequential numbers (3+)
     - Sequential symbols (3+)
 
-##Screenshots
+## Screenshots
 
 - Application main window.
 
