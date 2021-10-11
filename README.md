@@ -1,6 +1,6 @@
 # Password Strength Meter
 
-A simple application which calculate password strength.
+A simple application which calculates password strength.
 
 ## Rules of Calculating Password Strength
 - **Additions**
